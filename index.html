@@ -1,0 +1,429 @@
+
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web - Sutrisno Gande </title>
+    <style>
+        /* --- CYBERPUNK DEVELOPER DARK THEME --- */
+        :root {
+            --bg-main: #0b0f19;         /* Hitam obsidian cyber */
+            --bg-card: rgba(22, 30, 49, 0.7); /* Biru gelap transparan (glassmorphism) */
+            --accent-neon: #34d399;     /* Hijau mint neon khas developer */
+            --accent-glow: rgba(52, 211, 153, 0.15);
+            --text-main: #f8fafc;       /* Putih terang */
+            --text-muted: #94a3b8;      /* Abu-abu teks */
+            --border-cyber: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            font-family: 'JetBrains Mono', 'Fira Code', 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            margin: 0;
+            color: #fff;
+        }
+
+        /* --- MINI TOP NAVIGATION BAR --- */
+        .top-navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background-color: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-cyber);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--accent-neon);
+            letter-spacing: 1px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 13px;
+            padding: 6px 16px;
+            border-radius: 6px;
+            border: 1px solid var(--accent-neon);
+            background: var(--accent-glow);
+            transition: 0.3s;
+        }
+        .nav-links a:hover {
+            box-shadow: 0 0 15px var(--accent-neon);
+        }
+
+        /* --- DASHBOARD HERO HEADER --- */
+        .header-hero {
+            max-width: 900px;
+            margin: 40px auto 10px auto;
+            padding: 0 25px;
+        }
+
+        .terminal-tag {
+            display: inline-block;
+            font-size: 11px;
+            background: #1e293b;
+            padding: 4px 10px;
+            border-radius: 4px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            border: 1px solid var(--border-cyber);
+        }
+
+        .header-hero h1 {
+            font-size: 28px;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+        
+        .header-hero h1 span {
+            color: var(--accent-neon);
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        /* Grid Informasi Atas Style Minimalis */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            border-top: 1px dashed var(--border-cyber);
+            padding-top: 20px;
+        }
+        .info-item .label { display: block; font-size: 10px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; }
+        .info-item .value { display: block; font-size: 13px; color: #fff; font-weight: 500; }
+
+        /* --- KONTEN UTAMA --- */
+        .main-content {
+            padding: 30px 25px 60px 25px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* --- CARD PROFILE GLASSMORPHISM --- */
+        .profile-section {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-cyber);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 35px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .profile-section h2 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--accent-neon);
+        }
+
+        .profile-container {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        /* Frame Foto Lingkaran Cyber */
+        .profile-frame {
+            flex-shrink: 0;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--accent-neon);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .profile-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-details { flex-grow: 1; }
+        .profile-table { width: 100%; border-collapse: collapse; }
+        .profile-table td { padding: 8px 5px; font-size: 14px; color: var(--text-muted); }
+        .profile-table td.value-bio { color: #fff; }
+        .profile-table td.label-bio { width: 30%; font-weight: bold; color: #cbd5e1; }
+
+        /* --- KARTU LIST TUGAS --- */
+        .card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-cyber);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .card h3 { font-size: 18px; margin-bottom: 30px; border-left: 3px solid var(--accent-neon); padding-left: 10px; }
+
+        .list-item {
+            position: relative;
+            padding-left: 30px;
+            padding-bottom: 35px;
+            border-left: 1px solid var(--border-cyber);
+        }
+
+        .list-item:last-child { padding-bottom: 0; border-left: none; }
+
+        /* Bulatan Tracker Samping */
+        .list-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 5px;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: var(--accent-neon);
+            box-shadow: 0 0 10px var(--accent-neon);
+        }
+
+        .item-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .badge {
+            background-color: rgba(52, 211, 153, 0.1);
+            color: var(--accent-neon);
+            font-size: 11px;
+            padding: 2px 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(52, 211, 153, 0.3);
+        }
+
+        .item-text h4 { font-size: 16px; margin: 0; }
+        
+        /* Box Soal Bergaya Code-Snippets */
+        .soal-box {
+            background-color: #0f172a;
+            border: 1px solid var(--border-cyber);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-size: 13.5px;
+            color: #cbd5e1;
+        }
+        
+        .soal-box ol, .soal-box ul { margin: 5px 0; padding-left: 20px; }
+
+        .info-note {
+            font-size: 12px;
+            color: #fbbf24;
+            background: rgba(251, 191, 36, 0.05);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-top: 12px;
+            display: block;
+        }
+
+        /* Tombol download bergaya terminal click */
+        .tombol-buka {
+            font-size: 12px;
+            color: var(--bg-main);
+            background-color: var(--accent-neon);
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            padding: 8px 18px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            transition: 0.2s;
+        }
+
+        .tombol-buka:hover { 
+            background-color: #059669;
+            box-shadow: 0 0 15px rgba(52, 211, 153, 0.4);
+            transform: scale(1.02);
+        }
+
+        /* RESPONSIVE BREAKPOINT LAYAR HP */
+        @media (max-width: 768px) {
+            .top-navbar { padding: 15px 20px; }
+            .info-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .profile-container { flex-direction: column; text-align: center; }
+            .profile-table td { display: block; width: 100%; text-align: left; }
+            .profile-table td.label-bio { padding-bottom: 0; }
+            .item-header { flex-direction: column; align-items: flex-start; gap: 5px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Bar Navigasi Atas Sleek -->
+    <nav class="top-navbar">
+        <div class="brand"></div>
+        <div class="nav-links">
+            <a href="#">Repository Aktif</a>
+        </div>
+    </nav>
+
+    <!-- Header Model Terminal Dashboard -->
+    <header class="header-hero">
+        <div class="terminal-tag">root@Sutrisno:~# running assignments</div>
+        <h1>ALGORITMA & <span>PEMBROGRAMAN</span></h1>
+        <div class="subtitle">Arsip Digital Tugas Mandiri Mahasiswa Informatika</div>
+        
+        <div class="info-grid">
+            <div class="info-item">
+                <span class="label">Mata Kuliah</span>
+                <span class="value">Algoritma & Pemrograman</span>
+            </div>
+            <div class="info-item">
+                <span class="label">Bahasa</span>
+                <span class="value">Python / Core</span>
+            </div>
+            <div class="info-item">
+                <span class="label">Metode</span>
+                <span class="value">Pseudocode & Flowchart</span>
+            </div>
+            <div class="info-item">
+                <span class="label">Status</span>
+                <span class="value" style="color: var(--accent-neon);">● Cloud Integrated</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        
+        <!-- BAGIAN DATA DIRI / TENTANG SAYA -->
+        <section class="profile-section">
+            <h2>[01] Profil Pengembang</h2>
+            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 20px;">Sistem basis data portofolio mandiri berbasis HTML & CSS untuk perekaman berkas tugas kuliah secara online, terstruktur, dan efisien.</p>
+            
+            <div class="profile-container">
+                <div class="profile-frame">
+                    <img src="https://cdn.phototourl.com/free/2026-06-11-609fa8a8-bf81-4e9b-bc5a-7555f6b9e976.jpg" alt="Foto Sutrisno\ Gande">
+                </div>
+
+                <div class="profile-details">
+                    <table class="profile-table">
+                        <tr>
+                            <td class="label-bio">Nama Lengkap</td>
+                            <td class="value-bio">: Sutrisno Gande</td>
+                        </tr>
+                        <tr>
+                            <td class="label-bio">NIM</td>
+                            <td class="value-bio">: 250403010013</td>
+                        </tr>
+                        <tr>
+                            <td class="label-bio">Program Studi</td>
+                            <td class="value-bio">: Teknik Informatika (S1)</td>
+                        </tr>
+                        <tr>
+                            <td class="label-bio">Instansi</td>
+                            <td class="value-bio">: Universitas PGRI Kanjuruhan Malang</td>
+                        </tr>
+                        <tr>
+                            <td class="label-bio">Kelas</td>
+                            <td class="value-bio">: B</td> 
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- KUMPULAN TUGAS TRACKER -->
+        <div class="card">
+            <h3>[02] Direktori Berkas Tugas</h3>
+            
+            <!-- TUGAS 1 -->
+            <div class="list-item">
+                <div class="item-text">
+                    <div class="item-header">
+                        <span class="badge">Task_01.log</span>
+                        <h4>Tugas 1: Analisis Kasus & Teori Dasar</h4>
+                    </div>
+                    
+                    <div class="soal-box">
+                        <strong>Soal Teori & Kasus:</strong>
+                        <ol>
+                            <li>Berikan contoh algoritma di kehidupan sehari hari dengan studi kasus dibawah ini:
+                                <ul>
+                                    <li>a. Mengambil uang di ATM</li>
+                                    <li>b. Membuat kopi yang rasa manis dan pahitnya pas</li>
+                                    <li>c. Menghitung nilai y dari persamaan y = 3x + 6</li>
+                                </ul>
+                            </li>
+                            <li>Apa yang dimaksud dengan algoritma dan program?</li>
+                            <li>Suatu algoritma terdiri dari tiga struktur dasar, yaitu sekuensial, pemilihan, dan perulangan. Jelaskan masing-masing!</li>
+                            <li>Uraikan fungsi dari Bahasa pemrograman yg anda ketahui !</li>
+                        </ol>
+                        <strong>Instruksi Tambahan:</strong><br>
+                        Jawaban diberi NAMA_KELAS dan di taruk didrive masing2 Mhs (Open Acces) dan Linknya dikirim diForum ini (Komentar)
+                    </div>
+                    
+                    <span class="info-note">⚠️ Pengumpulan: Beri nama NAMA_KELAS, simpan di Drive pribadi (Open Access), tautkan di Forum. Verifikasi langsung minggu depan lewat laptop saat jam kelas.</span>
+                    <a href="https://drive.google.com/file/d/1uhl5WSgyOiHT58tdf9kerYz5P0fwKw8L/view?usp=sharing" target="_blank" class="tombol-buka">Execute / Fetch Task 1</a>
+                </div>
+            </div>
+            
+            <!-- TUGAS 2 -->
+            <div class="list-item">
+                <div class="item-text">
+                    <div class="item-header">
+                        <span class="badge">Task_02.log</span>
+                        <h4>Tugas 2: Algoritma Sekuensial Kompleks</h4>
+                    </div>
+                    <p style="font-size: 13.5px; color: var(--text-muted); margin: 10px 0;">Menyusun struktur algoritma linear (sekuensial) dari studi kasus riil yang diimplementasikan ke bentuk Flowchart, Pseudocode deskriptif, serta Source Code pemrograman bebas.</p>
+                    <a href="https://drive.google.com/file/d/1edl0cJoxdnxufR4d7Ms-mMgnvyHv5tI_/view?usp=sharing" target="_blank" class="tombol-buka">Execute / Fetch Task 2</a>
+                </div>
+            </div>
+
+            <!-- TUGAS 3 -->
+            <div class="list-item">
+                <div class="item-text">
+                    <div class="item-header">
+                        <span class="badge">Task_03_UAS.log</span>
+                        <h4>Tugas 3: Implementasi Struktur Perulangan</h4>
+                    </div>
+                    
+                    <div class="soal-box">
+                        <strong>Instruksi Program:</strong><br>
+                        Buatlah Program yang terdiri dari :
+                        <ul>
+                            <li>- Perulangan Struktur For</li>
+                            <li>- Perulangan Struktur While</li>
+                            <li>- Perulangan Struktur Do-While</li>
+                            <li>- Perulangan Bersarang (Nested Loop)</li>
+                            <li>- Menggunakan bahasa pemrograman yang dikuasai. Dikumpulkan saat jadwal UAS (bisa digabung berkas sebelumnya).</li>
+                        </ul>
+                        Note : Nilai + Jika diletakkan di github (Online) 
+                    </div>
+                    
+                    <span class="info-note">📌 Catatan UAS: Dapat dikonsolidasikan dengan direktori penyimpanan tugas sebelumnya. Poin tambahan dialokasikan jika source code dideploy ke GitHub.</span>
+                    <a href="https://drive.google.com/file/d/1Yeb7yrUGTzYFFHkVzAdgzYh9v9mZywv8/view?usp=sharing" target="_blank" class="tombol-buka">Execute / Fetch Task 3 (UAS)</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>
